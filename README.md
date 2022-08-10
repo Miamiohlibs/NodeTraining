@@ -52,7 +52,7 @@ app.listen(3000)                   // serve the website at localhost:3000
 #### Some other features of Express:
 * **multiple routes**
   * add a section like `app.get('/welcome', function(req,res) {...}` to create localhost:3000/welcome with different content than the main route/address    
-* ability to take in/apply user submitted data 
+* **ability to take in/apply user submitted data**
   * create a personalize Hello page based on data submitted
   * use a url like: `http://localhost:3000/welcome?name=Ken` to be interpreted by:
 ```
