@@ -34,6 +34,9 @@ This project is designed to offer an opportunity to build up a developer's Node.
 
 ## Units 
 ### Unit 1: Express
+
+**Video Tutorial**: [Express JS Crash Course](https://www.youtube.com/watch?v=L72fhGm1tfE)
+
 Express is a Node-based framework for developing websites. A "Hello World" in Express might look like this:
 ```
 const express = require('express'); // use the express module
