@@ -90,3 +90,26 @@ app.get('/welcome', function(req,res) {
 </body>
 </html>
 ```
+
+### Unit 2: Asyncronous JavaScript
+**Video Tutorial**: [Async Crash Course](https://www.youtube.com/watch?v=PoRJizFvM7s)
+
+Some JavaScript operations happen asyncronously, meaning that the script may send a request but then keeps doing other business while it waits for a response to the request. Maybe you need to request 3 separate pieces of information from 3 different websites -- you can make all three requests asyncronously. You don't care what order you get the information in, but you need all three pieces of information to proceed -- so you fire off all three requests, and then proceed once all three reply (rather than doing a sequestial: request/wait #1, request/wait #2, request/wait #3....) 
+
+Understanding asyncronous operations is important to working with APIs. 
+
+In the tutorial, pay special attention to Promises and to the Async/Await way of organizing code. 
+
+### Unit 3: Axios & APIs
+
+**Video Tutorial**: [Axios Crash Course](https://www.youtube.com/watch?v=6LyagkoRWYA)
+
+Axios is a Node module for handling HTTP requests, including GET, POST, PUT, DELETE and other methods. For the purposes of our project, GET requests are probably all you'll need. 
+
+The main target of your Axios requests will be the Meteostats API (hosted by RapidApi) that returns weather data for a particular place and time. To find the a particular weather station's ID, use the [nearby weather stations](https://dev.meteostat.net/api/stations/nearby.html#endpoint) endpoint to request station IDs for a particular latitiude and longitude. You'll only need to do this once per location.
+
+Your app will use Axios to make calls to the [Daily weather data](https://dev.meteostat.net/api/stations/daily.html#endpoint) endpoint. 
+
+The free version of the API will give you 500 calls per month. You'll use up some of those calls while you're figuring out how to make the requests. Once you do that, you'll want to use a cached copy of the request data rather than making a live API call for every page load while you're building other parts of the app. (You'll use the live API calls again once you're ready to put your app into action.) 
+
+As you work on the tutorial linked above, try converting the requests to the Async/Await structure you learned about in Unit 2. 
