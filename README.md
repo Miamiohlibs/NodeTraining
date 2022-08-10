@@ -111,11 +111,21 @@ Understanding asyncronous operations is important to working with APIs.
 
 In the tutorial, pay special attention to Promises and to the Async/Await way of organizing code. 
 
+### Unit 3: Object Oriented Javascript
+**Video Tutorial** [JavaScript OOP Crash Course](https://www.youtube.com/watch?v=vDJpGenyHaA)
+
+We're going to want to build some classes for managing our data. Go through this tutorial to familiarize yourself with how classes work in JavaScript.
+
+**Task**
+
+Do the tutorial! We'll write some classes we care about in Unit 4.
+
+
 **Task**
 
 1. Just do the tutorial and follow the examples
 
-### Unit 3: Axios & APIs
+### Unit 4: Axios & APIs
 
 **Video Tutorial**: [Axios Crash Course](https://www.youtube.com/watch?v=6LyagkoRWYA)
 
@@ -152,12 +162,25 @@ The free version of the API will give you 500 calls per month. You'll use up som
     * wrap in a try/catch block to log errors
     * return successful query results to calling function   
 
-### Unit 4: Unit Testing with Jest
+### Unit 5: Unit Testing with Jest
 **Video Tutorial**: [Jest Crash Course](https://www.youtube.com/watch?v=7r4xVDI2vho)
 
 Unit testing allows us to write code to test our code - does each one of our functions or class methods give the desired output? If we write an `Add(a,b)` function, does it correctly return `5` given `a=3,b=2`? What if `a=3,b=undefined`? Do we want it to return `3` or throw and error? Either could be correct, but we should know which response we want it to give and we should ensure that the code behaves as expected.
 
 **Tasks** 
 
-Write unit tests for the WeatherAPI methods in Unit 3.  
+Write unit tests for the WeatherAPI methods in Unit 4.  
+
+### Unit 6: Processing data
+**Video Tutorial**: [Higher Order Functions & Arrays](https://www.youtube.com/watch?v=rRgD1yVwIvE)
+
+Now that we're retrieving API data, we need to wrangling the big pile of data down to just what we care about. Here's some [sample JSON you can parse](https://gist.github.com/kenirwin/6c95680adcd9333e1c2fc4b49ca2f2e2#file-sample-weather-data)
+
+**Task**
+
+Using what you've learned, write a class that takes in this data and can do a few things:
+* limit the data down to just data from a particular date range
+* returns an array of just the average, high, or low data for a specified period
+* returns the first and last dates as a string such as "January 1, 2020 - January 31, 2020"
+* returns the first date as an object with year (as a four-digit number), month (0-11), day (1-31) -- **Note:** You don't have to reinvent this wheel!
 
