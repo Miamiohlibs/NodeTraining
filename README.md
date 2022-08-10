@@ -49,8 +49,8 @@ app.get('/', function (req, res) {  // create a base route
 app.listen(3000)                   // serve the website at localhost:3000
 ```
 
-Other features of Express:
-* multiple routes
+#### Some other features of Express:
+* **multiple routes**
   * add a section like `app.get('/welcome', function(req,res) {...}` to create localhost:3000/welcome with different content than the main route/address    
 * ability to take in/apply user submitted data 
   * create a personalize Hello page based on data submitted
@@ -61,11 +61,12 @@ app.get('/welcome', function(req,res) {
 });
 ```
   
-* view templates
+* **view templates**
   * rather than building the whole web page in the main application, send the relevant data to a view template that inserts relevant data into an HTML outline, e.g.
   * in the ejs template, write plain HTML but insert variables with tags like: `<%= name %>`
+  * Note: there are multiple view engines like EJS; another is Handlebars. They work in similar fashions but use different syntax/punctuation
 ```
-/* in the app.js file */
+/* in the app.js file */ 
 app.set('view engine', 'ejs');
 app.get('/welcome', function(req,res) { 
     let length = req.query.name.length;
