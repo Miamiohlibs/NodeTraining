@@ -128,6 +128,7 @@ Your app will use Axios to make calls to the [Daily weather data](https://dev.me
 The free version of the API will give you 500 calls per month. You'll use up some of those calls while you're figuring out how to make the requests. Once you do that, you'll want to use a cached copy of the request data rather than making a live API call for every page load while you're building other parts of the app. (You'll use the live API calls again once you're ready to put your app into action.) 
 
 **Tasks** 
+
 1. Use the As you work on the tutorial linked above, try converting the requests to the Async/Await structure you learned about in Unit 2.
 2. Find the lat/long values for the cities you selected in unit 1 (Wikipedia is an easy source.) 
 3. Get the decimal values for the lat/long using [this converter](https://fcc.gov/media/radio/dms-decimal) -- for example, Wikipedia tells me that Laurel MD is at: 39°5′45″N 76°51′35″W. The Converter tells me that the decimal values are: 39.095833, 76.859722. **Important Note**: The converter won't tell you this, but West and South values should get a negative sign, so Laurel should really be at: 39.095833, **-76.859722**
@@ -157,5 +158,6 @@ The free version of the API will give you 500 calls per month. You'll use up som
 Unit testing allows us to write code to test our code - does each one of our functions or class methods give the desired output? If we write an `Add(a,b)` function, does it correctly return `5` given `a=3,b=2`? What if `a=3,b=undefined`? Do we want it to return `3` or throw and error? Either could be correct, but we should know which response we want it to give and we should ensure that the code behaves as expected.
 
 **Tasks** 
+
 Write unit tests for the WeatherAPI methods in Unit 3.  
 
