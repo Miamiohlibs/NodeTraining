@@ -176,11 +176,13 @@ Write unit tests for the WeatherAPI methods in Unit 4.
 
 Now that we're retrieving API data, we need to wrangling the big pile of data down to just what we care about. Here's some [sample JSON you can parse](https://gist.github.com/kenirwin/6c95680adcd9333e1c2fc4b49ca2f2e2#file-sample-weather-data)
 
+Use [Day.js](https://day.js.org/en/) to parse and format dates/times/timestamps.
+
 **Task**
 
 Using what you've learned, write a class that takes in this data and can do a few things:
 * limit the data down to just data from a particular date range
 * returns an array of just the average, high, or low data for a specified period
 * returns the first and last dates as a string such as "January 1, 2020 - January 31, 2020"
-* returns the first date as an object with year (as a four-digit number), month (0-11), day (1-31) -- **Note:** You don't have to reinvent this wheel!
+* returns the first date as an object with year (as a four-digit number), month (0-11), day (1-31)
 
