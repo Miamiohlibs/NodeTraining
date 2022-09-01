@@ -1,17 +1,29 @@
 const express = require('express'); // use the express module
 const path = require('path');
-const PORT = process.env.PORT || 3000;
-const app = express();              // instantiate an express instance called "app"
+const { allowedNodeEnvironmentFlags } = require('process');
+// instantiate an express instance called "app"
+const app = express();
+app.listen(3000);
+// register view engine
+app.set('views', './views');
+app.set('view engine', 'ejs');
 
-// statuc folder = public
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true}));
 
-// thinking
-// var data = JSON.parse(lite.json)
-// search fields name -> en, country
-// briefly included lite.json; don't necessarily need it; can be called but may be easier to not do that
-
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+// https://www.youtube.com/watch?v=yXEesONd_54&list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU&index=7
+app.get('/', (req, res) => {
+    res.render('index');
+});
+// static folder = public
+// app.use(express.static(path.join(__dirname, 'public')));
+// var stations = JSON.parse(lite.json);
+// https://www.youtube.com/watch?v=1iysNUrI3lw
+// allow user to search for stations on
+// station.country
+// station["name"].en
+// to find correlating
+// station.id
 
 // https://dev.meteostat.net/api/stations/hourly.html#parameters
 // https://dev.meteostat.net/api/stations/nearby.html#example
@@ -23,7 +35,7 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 // const options = {
 //   method: 'GET',
 //   url: 'https://meteostat.p.rapidapi.com/stations/monthly',
-//   params: {station: '10637', start: '2020-01-01', end: '2020-12-31'},
+//   params: {station: '10637', start: document.getElementById('startD'), end: document.getElementById('endD')},
 //   headers: {
 //     'X-RapidAPI-Key': 'SIGN-UP-FOR-KEY',
 //     'X-RapidAPI-Host': 'meteostat.p.rapidapi.com'

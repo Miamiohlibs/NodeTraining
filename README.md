@@ -186,3 +186,9 @@ Using what you've learned, write a class that takes in this data and can do a fe
 * returns the first and last dates as a string such as "January 1, 2020 - January 31, 2020"
 * returns the first date as an object with year (as a four-digit number), month (0-11), day (1-31)
 
+## Additional Resources Used
+
+1. lite.json
+https://github.com/meteostat/dev/blob/ae385a9f89b51b7574d8aa754f6bf3bfdc12f339/src/bulk/stations.md
+(Open) file containing all active weather stations which have reported data to Meteostat. Can be downloaded here:
+https://bulk.meteostat.net/v2/stations/lite.json.gz
