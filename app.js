@@ -1,22 +1,16 @@
-const express = require('express');
+import express from 'express';
 const app = express();
+const fetch = require("./fetch");
 app.use(express.json());
-
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.urlencoded({ extended: true }))
+var callbacks = require('./callbacks');
+var promises = require('./promises');
 
 app.get('/', (req, res) => {
     res.render('index',
-        { title: 'NodeTraining' } 
-    );
-});
-
-app.post('/output', (req, res) => {
-    const { location, sdate, edate } = req.body;
-    res.render('index', {
-        title: 'NodeTraining',
-        location, sdate, edate}
+        { title: 'Express' } 
     );
 });
 
