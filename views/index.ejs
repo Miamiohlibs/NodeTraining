@@ -1,0 +1,16 @@
+<html lang="en">
+    <%- include('partials/head') %>
+    <body>
+        <h1><%= title %></h1>
+        <div class="container">
+            <%- include('partials/form') %>
+        </div>
+        <div class="container">
+            <% if (typeof location != "undefined") { %>
+                <label><%= location %></label>
+                <ul>Start Date: <%= sdate %></ul>
+                <ul>End Date: <%= edate %></ul>
+            <% } %>
+        </div>
+    </body>
+</html>
