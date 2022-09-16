@@ -1,17 +1,10 @@
 // https://dev.to/desoga/auto-complete-country-application-with-javascript-json-4ah2
-const search = async searchBox => {
-    const res = await fetch('/public/lite.json');
+const id = async id => {
+    const res = await fetch('/active.json');
     const stations = await res.json();
 
-    let fits = stations.filter(country => {
-      const regex = new RegExp(`^${searchBox}`, 'gi');
-      return country.name.match(regex) || country.abbr.match(regex);
+    let fits = stations.filter(en => {
+      const regex = new RegExp(`^${id}`, "");
+      return en.match(regex);
     });
-    
-    //Clears Data If Search Input Field Is Empty
-    if (searchBox.length === 0) {
-      fits = [];
-      countryList.innerHTML = '';
-    }
-    outputHtml(fits);
 };
