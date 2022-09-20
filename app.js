@@ -2,18 +2,14 @@ const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
 const app = express();
-const config = require('./config');
+const config = require('./config.js');
 app.use(express.json());
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }))
 
 // await async this
-let headers = { 'X-RapidAPI-Key': config.key, 'X-RapidAPI-Host': config.host }
+const headers = { 'X-RapidAPI-Key': config.key, 'X-RapidAPI-Host': config.host }
 
-// stores req.body from app.post for parseId()
-let search = {};
-// params is valid only post-parseId()
-let params = {};
 // stores response.data from axios request
 let resp = {};
 
@@ -24,9 +20,9 @@ app.get('/', (req, res) => {
 });
 
 app.post('/output', (req, res) => {
-    const { en, start, end } = req.body;
-    search = { en, start, end };
-    params = { id: parseId(search), start, end };
+    let  { en, start, end } = req.body;
+    let search = { en, start, end };
+    let params = { station: parseId(search), start, end };
 
     const options = {
         method: 'GET',
@@ -34,11 +30,15 @@ app.post('/output', (req, res) => {
         params: params,
         headers: headers
     };
-    // axios.request(options).then(function (response) {
-    //     console.log(response.data);
-    //     // filter response.data, mind
-    //     resp = response.data;
-    // });
+    console.log(options);
+    // async await this
+    axios.request(options).then(function (response) {
+        console.log(response.data);
+        // filter response.data, mind
+        resp = response.data;
+    }).catch(error => {
+        console.error(error);
+    });
     
     res.render('index', {
         title: 'NodeTraining',
