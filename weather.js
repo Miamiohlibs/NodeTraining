@@ -20,9 +20,15 @@ module.exports = class WeatherAPI {
             let response = await axios.request(options);
             // return successful query results to calling function
                 return response.data;
-            }
-            catch(error) {
-                console.error(error);
-            };
         }
+        catch(error) {
+            console.error(error);
+        };
+    }
+
+    async GetDailyWeather(params) {
+        const headers = { 'X-RapidAPI-Key': config.key, 'X-RapidAPI-Host': config.host }
+        let result = await this.PerformGetRequest(headers, params);
+        return result;
+    }
 }

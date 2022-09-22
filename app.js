@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 app.post('/output', async (req, res) => {
     let  { en, start, end } = req.body;
     let params = { station: '00FAY', start, end };
-    let report = await GetDailyWeather(params);
+    let report = await weather.GetDailyWeather(params);
 
     res.render('index', {
         title: 'NodeTraining',
@@ -41,12 +41,6 @@ function CreateDailyParams(en) {
         }
     });
     return sID;
-}
-
-async function GetDailyWeather(params) {
-    const headers = { 'X-RapidAPI-Key': config.key, 'X-RapidAPI-Host': config.host }
-    let result = await weather.PerformGetRequest(headers, params);
-    return result;
 }
 
 app.listen(3000);
