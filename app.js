@@ -22,11 +22,19 @@ app.post('/output', async (req, res) => {
     let params = { station: '00FAY', start, end };
     let report = await weather.GetDailyWeather(params);
 
+    // filter report -- what do we want? tavg
+    var entry = filter(report);
+
     res.render('index', {
         title: 'NodeTraining',
-        report }
+        entry }
     );
 });
+
+function filter(report) {
+    // attempt untested -- get tavg
+    return report.filter(report => report.data.some(data => data.tavg == tavg))
+}
 
 function CreateDailyParams(en) {
     // find and parse file
