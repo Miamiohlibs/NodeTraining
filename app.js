@@ -8,7 +8,6 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }))
 
 const config = require('./config.js');
-
 const WeatherAPI = require('./weather');
 const weather = new WeatherAPI();
 
@@ -44,4 +43,3 @@ function CreateDailyParams(en) {
 }
 
 app.listen(3000);
-module.exports = app;
