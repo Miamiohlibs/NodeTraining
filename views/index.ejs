@@ -12,5 +12,10 @@
                 <ul>End Date: <%= edate %></ul>
             <% } %>
         </div>
+        <div class="container">
+            <% if (typeof report != "undefined" ) { %>
+            <pre><%= JSON.stringify(report, null, 2) %></pre>
+            <% } %>
+        </div>
     </body>
 </html>
