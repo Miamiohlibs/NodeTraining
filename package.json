@@ -20,7 +20,8 @@
     "axios": "^0.27.2",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
-    "geo-coordinates-parser": "^1.5.8"
+    "geo-coordinates-parser": "^1.5.8",
+    "highcharts": "^10.2.1"
   },
   "devDependencies": {
     "jest": "^29.0.3"
