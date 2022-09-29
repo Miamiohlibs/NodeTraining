@@ -26,17 +26,14 @@ app.post('/output', async (req, res) => {
     let params = { station: CreateDailyParams(en), start, end };
     let report = await weather.GetDailyWeather(params);
 
-    var temperatures = Temperatures(report.data);
-    var eng = Anglicize(params);
-    var first = firstDateToObj(params);
+    var headerText = Anglicize(params);
+    var text = firstDateToObj(params);
+    var tempObj = JSON.stringify(Temperatures(report.data));
 
-    // add back temperatures after solving temperatures error
-    var result = eng + "\nStarts on " + first + ".\n With the temperatures \n" + temperatures;
-
-    res.render('index', {
-        title: 'NodeTraining',
-        result 
-    });
+    res.render('index', 
+        { title: 'NodeTraining',
+        headerText, text, tempObj
+    })
 });
 
 /**
@@ -50,7 +47,7 @@ app.post('/output', async (req, res) => {
 /**
  * NO associated information included in return.
  * @param {*} report 
- * @returns supplied first and last dates as English stringå
+ * @returns supplied first and last dates as English string
  */
 function Anglicize(args) {
     return dayjs(args.start).format('LL') + " to " + dayjs(args.end).format('LL');
