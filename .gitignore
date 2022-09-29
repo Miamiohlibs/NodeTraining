@@ -1,3 +1,5 @@
 node_modules
 config.js
 active.json
+sample.json
+filter.js

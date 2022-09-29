@@ -23,7 +23,7 @@ app.post('/output', async (req, res) => {
     let report = await weather.GetDailyWeather(params);
 
     // filter report -- what do we want? tavg
-    var entry = filter(report);
+    var temperatures = Temperatures(report);
 
     res.render('index', {
         title: 'NodeTraining',
@@ -31,9 +31,29 @@ app.post('/output', async (req, res) => {
     );
 });
 
-function filter(report) {
-    // attempt untested -- get tavg
-    return report.filter(report => report.data.some(data => data.tavg == tavg))
+/**
+ * NO associated information such as location, date.
+ * @param {*} report 
+ * @returns array of average, high, and low.
+ */
+function Temperatures(report) {
+    var tavg = data.filter(entry => entry.tavg != null).map(getTavg);
+    var tmin = data.filter(entry => entry.tmin != null).map(getTmin);
+    var tmax = data.filter(entry => entry.tmax != null).map(getTmax);
+
+    function getTavg(e) {
+        return e.tavg;
+    };
+
+    function getTmin(e) {
+        return e.tmin;
+    }
+
+    function getTmax(e) {
+        return e.tmax;
+    }
+
+    return { tmin: tmin, tavg: tavg, tmax: tmax };
 }
 
 function CreateDailyParams(en) {
