@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 
 app.post('/output', async (req, res) => {
     let  { en, start, end } = req.body;
-    let params = { station: '00FAY', start, end };
+    let params = { station: CreateDailyParams(en), start, end };
     let report = await weather.GetDailyWeather(params);
 
     var temperatures = Temperatures(report);
@@ -61,14 +61,17 @@ function Temperatures(args) {
     return { tmin: tmin, tavg: tavg, tmax: tmax };
 }
 
-function CreateDailyParams(en) {
-    // find and parse file
+/**
+ * @param {*} args 
+ * @returns station id of args.
+ */
+function CreateDailyParams(args) {
     let data = fs.readFileSync('active.json');
     let stations = JSON.parse(data);
     let sID;
     // except actually npm install fuzzyset.js to handle typos
     stations.forEach(s => {
-        if (en.en === s.name.en) {
+        if (args === s.name.en) {
             sID = s.id;
         }
     });
