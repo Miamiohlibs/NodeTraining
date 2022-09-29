@@ -11,6 +11,10 @@ const config = require('./config.js');
 const WeatherAPI = require('./weather');
 const weather = new WeatherAPI();
 
+const dayjs = require('dayjs');
+var localizedFormat = require('dayjs/plugin/localizedFormat');
+dayjs.extend(localizedFormat);
+
 app.get('/', (req, res) => {
     res.render('index',
         { title: 'NodeTraining' } 
@@ -22,8 +26,8 @@ app.post('/output', async (req, res) => {
     let params = { station: '00FAY', start, end };
     let report = await weather.GetDailyWeather(params);
 
-    // filter report -- what do we want? tavg
     var temperatures = Temperatures(report);
+    var eng = Anglicize(params);
 
     res.render('index', {
         title: 'NodeTraining',
@@ -32,26 +36,27 @@ app.post('/output', async (req, res) => {
 });
 
 /**
- * NO associated information such as location, date.
+ * NO associated information included in return.
+ * @param {*} report 
+ * @returns supplied first and last dates as English stringå
+ */
+function Anglicize(args) {
+    return dayjs(args.start).format('LL') + " to " + dayjs(args.end).format('LL');
+}
+
+/**
+ * NO associated information included in return.
  * @param {*} report 
  * @returns array of average, high, and low.
  */
-function Temperatures(report) {
-    var tavg = data.filter(entry => entry.tavg != null).map(getTavg);
-    var tmin = data.filter(entry => entry.tmin != null).map(getTmin);
-    var tmax = data.filter(entry => entry.tmax != null).map(getTmax);
+function Temperatures(args) {
+    var tavg = args.filter(entry => entry.tavg != null).map(getTavg);
+    var tmin = args.filter(entry => entry.tmin != null).map(getTmin);
+    var tmax = args.filter(entry => entry.tmax != null).map(getTmax);
 
-    function getTavg(e) {
-        return e.tavg;
-    };
-
-    function getTmin(e) {
-        return e.tmin;
-    }
-
-    function getTmax(e) {
-        return e.tmax;
-    }
+    function getTavg(e) {   return e.tavg;  };
+    function getTmin(e) {   return e.tmin;  };
+    function getTmax(e) {   return e.tmax;  };
 
     return { tmin: tmin, tavg: tavg, tmax: tmax };
 }
