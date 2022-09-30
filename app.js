@@ -13,6 +13,7 @@ const weather = new WeatherAPI();
 
 const dayjs = require('dayjs');
 var localizedFormat = require('dayjs/plugin/localizedFormat');
+const e = require('express');
 dayjs.extend(localizedFormat);
 
 app.get('/', (req, res) => {
@@ -26,11 +27,14 @@ app.post('/output', async (req, res) => {
     let params = { station: CreateDailyParams(en), start, end };
     let report = await weather.GetDailyWeather(params);
 
-    var temps = Temperatures(report.data);
     var chSubtitle = Anglicize(params, en);
+
+    var temps = Temperatures(report.data);
     var chAvg = temps.tavg;
     var chMin = temps.tmin;
     var chMax = temps.tmax;
+
+    var dates = getDates(report.data);
 
     // res.render('index', 
     //     { title: 'NodeTraining',
@@ -38,22 +42,9 @@ app.post('/output', async (req, res) => {
     //     chAvg, chMin, chMax
     // })
     res.render('index',
-        { title: "NodeTraining", chSubtitle, chAvg, chMin, chMax }
+        { title: "NodeTraining", chSubtitle, chAvg, chMin, chMax, dates }
     )
 });
-
-// app.get('/indexchart', (req, res) => {
-//     res.render('indexchart',
-//     { chSubtitle, chAvg, chMin, chMax })
-// });
-
-/**
- * @param {*} args 
- * @returns first date as object
- */
-function firstDateToObj(args) {
-    return dayjs(args.start).toDate();
-}
 
 /**
  * NO associated information included in return.
@@ -62,6 +53,16 @@ function firstDateToObj(args) {
  */
 function Anglicize(args, en) {
     return dayjs(args.start).format('LL') + " to " + dayjs(args.end).format('LL') + ' at ' + en;
+}
+
+/**
+ * NO associated information included in return.
+ * @param {*} args
+ * @returns array of dates
+ */
+function getDates(args) {
+    var res = args.filter(entry => entry.date != null).map(e => e.date);
+    return res;
 }
 
 /**
