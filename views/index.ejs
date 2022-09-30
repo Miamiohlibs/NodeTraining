@@ -6,17 +6,8 @@
             <%- include('partials/form') %>
         </div>
         <div class="container">
-            <% if (typeof location != "undefined") { %>
-                <label><%= location %></label>
-                <ul>Start Date: <%= sdate %></ul>
-                <ul>End Date: <%= edate %></ul>
-            <% } %>
-        </div>
-        <div class="container">
-            <% if (typeof tempObj != "undefined" ) { %>
-                <h2><%= headerText %></h2>
-                <p><%= text %></p>
-                <pre><%= tempObj %></pre>
+            <% if (typeof chMin != "undefined") { %>
+                <%- include('partials/chart') %>
             <% } %>
         </div>
     </body>
