@@ -26,9 +26,9 @@
             title: {
                 text: 'Date'
             },
-            categories: [
-                <%= dates %>
-            ]
+            categories: 
+                <%- JSON.stringify(dates) %>
+            
         },
         legend: {
             reversed: true
