@@ -13,6 +13,7 @@ const weather = new WeatherAPI();
 
 const dayjs = require('dayjs');
 var localizedFormat = require('dayjs/plugin/localizedFormat');
+const e = require('express');
 dayjs.extend(localizedFormat);
 
 app.get('/', (req, res) => {
@@ -26,36 +27,47 @@ app.post('/output', async (req, res) => {
     let params = { station: CreateDailyParams(en), start, end };
     let report = await weather.GetDailyWeather(params);
 
-    var headerText = Anglicize(params);
-    var text = firstDateToObj(params);
-    var tempObj = JSON.stringify(Temperatures(report.data));
+    var chSubtitle = Anglicize(params, en);
 
-    res.render('index', 
-        { title: 'NodeTraining',
-        headerText, text, tempObj
-    })
+    var temps = Temperatures(report.data);
+    var chAvg = temps.tavg;
+    var chMin = temps.tmin;
+    var chMax = temps.tmax;
+
+    var dates = getDates(report.data);
+
+    // res.render('index', 
+    //     { title: 'NodeTraining',
+    //     chSubtitle,
+    //     chAvg, chMin, chMax
+    // })
+    res.render('index',
+        { title: "NodeTraining", chSubtitle, chAvg, chMin, chMax, dates }
+    )
 });
-
-/**
- * @param {*} args 
- * @returns first date as object
- */
- function firstDateToObj(args) {
-    return dayjs(args.start).toDate();
-}
 
 /**
  * NO associated information included in return.
  * @param {*} report 
  * @returns supplied first and last dates as English string
  */
-function Anglicize(args) {
-    return dayjs(args.start).format('LL') + " to " + dayjs(args.end).format('LL');
+function Anglicize(args, en) {
+    return dayjs(args.start).format('LL') + " to " + dayjs(args.end).format('LL') + ' at ' + en;
 }
 
 /**
  * NO associated information included in return.
- * @param {*} report 
+ * @param {*} args
+ * @returns array of dates
+ */
+function getDates(args) {
+    var res = args.filter(entry => entry.date != null).map(e => e.date);
+    return res;
+}
+
+/**
+ * NO associated information included in return.
+ * @param {*} args
  * @returns array of average, high, and low.
  */
 function Temperatures(args) {

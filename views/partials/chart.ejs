@@ -1,0 +1,56 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/locale/zh-cn.js"></script>
+<figure class="highcharts-figure">
+    <div id="ch"></div>
+</figure>
+<script>
+    Highcharts.chart('ch', {
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: 
+            "<%= chSubtitle %>"
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Temperatures'
+            }
+        },
+        xAxis: {
+            title: {
+                text: 'Date'
+            },
+            categories: 
+                <%- JSON.stringify(dates) %>
+            
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+        series: [{
+            name: 'min',
+            data: 
+            <%= JSON.stringify(chMin) %>
+        }, {
+            name: 'avg',
+            data: 
+            <%= JSON.stringify(chAvg) %>
+        }, {
+            name: 'max',
+            data:
+            <%= JSON.stringify(chMax) %>
+        }]
+    });
+</script>
