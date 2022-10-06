@@ -59,7 +59,7 @@ app.post('/output', async (req, res) => {
 
     var dates = getDates(report.data);
     res.render('index',
-        { title: "NodeTraining", chSubtitle, chAvg, chMin, chMax, dates, options }
+        { title: "NodeTraining", chSubtitle, en, chAvg, chMin, chMax, dates, options }
     )
 });
 
@@ -69,7 +69,7 @@ app.post('/output', async (req, res) => {
  * @returns supplied first and last dates as English string
  */
 function Anglicize(args, en) {
-    return dayjs(args.start).format('LL') + " to " + dayjs(args.end).format('LL') + ' at ' + en;
+    return dayjs(args.start).format('LL') + " to " + dayjs(args.end).format('LL') + ' at ';
 }
 
 /**
