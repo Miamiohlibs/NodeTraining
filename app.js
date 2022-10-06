@@ -16,9 +16,32 @@ var localizedFormat = require('dayjs/plugin/localizedFormat');
 const e = require('express');
 dayjs.extend(localizedFormat);
 
+    var options = [{
+        option: "Nashville",
+        value: "Nashville Airport"
+    }, {
+        option: "Tartu",
+        value: "Tartu"
+    }, {
+        option: "Tallinn",
+        value: "Tallin / Tallinn / Lennart Meri / Mõigu"
+    }, {
+        option: "Dayton",
+        value: "Dayton"
+    }, {
+        option: "Camrose",
+        value: "Holden Agdm"
+    }, {
+        option: "Luxembourg",
+        value: "Luxembourg / Luxembourg"
+    }, {
+        option: "Strasbourg",
+        value: "Strasbourg"
+    }];
+
 app.get('/', (req, res) => {
     res.render('index',
-        { title: 'NodeTraining' } 
+        { title: 'NodeTraining', options } 
     );
 });
 
@@ -27,7 +50,7 @@ app.post('/output', async (req, res) => {
     let params = { station: CreateDailyParams(en), start, end };
     let report = await weather.GetDailyWeather(params);
 
-    var chSubtitle = Anglicize(params, en);
+    var chSubtitle = Anglicize(params);
 
     var temps = Temperatures(report.data);
     var chAvg = temps.tavg;
@@ -35,14 +58,8 @@ app.post('/output', async (req, res) => {
     var chMax = temps.tmax;
 
     var dates = getDates(report.data);
-
-    // res.render('index', 
-    //     { title: 'NodeTraining',
-    //     chSubtitle,
-    //     chAvg, chMin, chMax
-    // })
     res.render('index',
-        { title: "NodeTraining", chSubtitle, chAvg, chMin, chMax, dates }
+        { title: "NodeTraining", chSubtitle, en, chAvg, chMin, chMax, dates, options }
     )
 });
 
@@ -51,8 +68,8 @@ app.post('/output', async (req, res) => {
  * @param {*} report 
  * @returns supplied first and last dates as English string
  */
-function Anglicize(args, en) {
-    return dayjs(args.start).format('LL') + " to " + dayjs(args.end).format('LL') + ' at ' + en;
+function Anglicize(args) {
+    return dayjs(args.start).format('LL') + " to " + dayjs(args.end).format('LL') + ' at ';
 }
 
 /**
