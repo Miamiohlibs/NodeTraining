@@ -50,7 +50,7 @@ app.post('/output', async (req, res) => {
     let params = { station: CreateDailyParams(en), start, end };
     let report = await weather.GetDailyWeather(params);
 
-    var chSubtitle = Anglicize(params, en);
+    var chSubtitle = Anglicize(params);
 
     var temps = Temperatures(report.data);
     var chAvg = temps.tavg;
@@ -68,7 +68,7 @@ app.post('/output', async (req, res) => {
  * @param {*} report 
  * @returns supplied first and last dates as English string
  */
-function Anglicize(args, en) {
+function Anglicize(args) {
     return dayjs(args.start).format('LL') + " to " + dayjs(args.end).format('LL') + ' at ';
 }
 

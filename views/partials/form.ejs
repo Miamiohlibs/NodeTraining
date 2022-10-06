@@ -6,7 +6,9 @@
         <!-- if value == station.name add selected tag -->
         <select class="form-control" name="en" id="en">
             <% options.forEach( entry => { %>
-                <option value="<%- entry.value %>">
+                <% var s = ""; %>
+                <% if ( typeof en != "undefined" && en == entry.value ) s = " selected"; %>
+                <option value="<%- entry.value %>"<%- s %>>
                 <%- entry.option %>
                 </option>
             <% }); %>
