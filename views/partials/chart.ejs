@@ -40,17 +40,18 @@
         },
         colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
         series: [{
-            name: 'min',
-            data: 
-            <%= JSON.stringify(chMin) %>
+            name: 'max',
+            data:
+            <%= JSON.stringify(chMax) %>
         }, {
             name: 'avg',
             data: 
             <%= JSON.stringify(chAvg) %>
         }, {
-            name: 'max',
-            data:
-            <%= JSON.stringify(chMax) %>
+            
+            name: 'min',
+            data: 
+            <%= JSON.stringify(chMin) %>
         }]
     });
 </script>
